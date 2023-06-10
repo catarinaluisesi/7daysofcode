@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>#7DaysOfCode Lógica JS - DIA 3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>#7DaysOfCode Lógica JS - DIA 3</h1>
+
+  <p id="intro">Bem-vindo ao jogo de desenvolvimento de carreira na área de programação! Vamos começar!</p>
+
+  <div id="game-container">
+    <p id="area-question">Você deseja seguir para a área de Front-End ou Back-End?</p>
+
+    <button id="front-end-button">Front-End</button>
+    <button id="back-end-button">Back-End</button>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro');
+    const gameContainer = document.getElementById('game-container');
+    const areaQuestion = document.getElementById('area-question');
+    const frontEndButton = document.getElementById('front-end-button');
+    const backEndButton = document.getElementById('back-end-button');
+
+    frontEndButton.addEventListener('click', () => {
+      areaQuestion.innerHTML = 'Ótimo! Agora escolha se deseja aprender React ou Vue:';
+
+      const frontEndFramework = prompt('Ótimo! Agora escolha se deseja aprender React ou Vue:');
+
+      const specializationChoice = prompt('Agora você pode escolher se especializar na área escolhida ou se tornar Fullstack. (Digite "Especializar" ou "Fullstack"):');
+
+      if (specializationChoice === 'Especializar') {
+        alert('Parabéns! Você escolheu se especializar na área de Front-End. Continue se dedicando e se aprimorando!');
+      } else if (specializationChoice === 'Fullstack') {
+        alert('Parabéns! Você escolheu se tornar Fullstack. Isso requer dedicação em várias áreas, mas pode trazer muitas oportunidades!');
+      } else {
+        alert('Opção inválida. O jogo será encerrado.');
+      }
+
+      const technologies = [];
+
+      do {
+        const technology = prompt('Digite o nome de uma tecnologia que você gostaria de aprender: ');
+        technologies.push(technology);
+
+        const continueChoice = prompt('Tem mais alguma tecnologia que você gostaria de aprender? (Digite "ok" para continuar ou qualquer outra coisa para encerrar): ');
+        
+        if (continueChoice.toLowerCase() !== 'ok') {
+          break;
+        }
+      } while (true);
+
+      alert(`Você escolheu as seguintes tecnologias para aprender: ${technologies.join(', ')}.`);
+      alert('Parabéns por suas escolhas! Continue se dedicando e aprendendo. O céu é o limite na área de programação!');
+    });
+
+    backEndButton.addEventListener('click', () => {
+      areaQuestion.innerHTML = 'Ótimo! Agora escolha se deseja aprender C# ou Java:';
+
+      const backEndLanguage = prompt('Ótimo! Agora escolha se deseja aprender C# ou Java:');
+
+      const specializationChoice = prompt('Agora você pode escolher se especializar na área escolhida ou se tornar Fullstack. (Digite "Especializar" ou "Fullstack"):');
+
+      if (specializationChoice === 'Especializar') {
+        alert('Parabéns! Você escolheu se especializar na área de Back-End. Continue se dedicando e se aprimorando!');
+      } else if (specializationChoice === 'Fullstack') {
+        alert('Parabéns! Você escolheu se tornar Fullstack. Isso requer dedicação em várias áreas, mas pode trazer muitas oportunidades!');
+      } else {
+        alert('Opção inválida. O jogo será encerrado.');
+      }
+
+      const technologies = [];
+
+      do {
+        const technology = prompt('Digite o nome de uma tecnologia que você gostaria de aprender: ');
+        technologies.push(technology);
+
+        const continueChoice = prompt('Tem mais alguma tecnologia que você gostaria de aprender? (Digite "ok" para continuar ou qualquer outra coisa para encerrar): ');
+        
+        if (continueChoice.toLowerCase() !== 'ok') {
+          break;
+        }
+      } while (true);
+
+      alert(`Você escolheu as seguintes tecnologias para aprender: ${technologies.join(', ')}.`);
+      alert('Parabéns por suas escolhas! Continue se dedicando e aprendendo. O céu é o limite na área de programação!');
+    });
+  </script>
+  <br>
+  
+  <button onclick="window.location.href = 'index.html';">Voltar para tela inicial</button>
+</body>
+</html>
+
