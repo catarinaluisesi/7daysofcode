@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Verificação de Variáveis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: #666;
+    }
+
+    script {
+      display: block;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      max-width: 400px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Verificação de Variáveis</h1>
+  <h2> Olhar o console do navegador!</h2>
+  <script>
+    window.onload = function() {
+      let numeroUm = 1;
+      let stringUm = '1';
+      let numeroTrinta = 30;
+      let stringTrinta = '30';
+      let numeroDez = 10;
+      let stringDez = '10';
+
+      if (numeroUm == stringUm) {
+        console.log('As variáveis numeroUm e stringUm têm o mesmo valor, mas tipos diferentes');
+      } else {
+        console.log('As variáveis numeroUm e stringUm não têm o mesmo valor');
+      }
+
+      if (numeroTrinta === stringTrinta) {
+        console.log('As variáveis numeroTrinta e stringTrinta têm o mesmo valor e mesmo tipo');
+      } else {
+        console.log('As variáveis numeroTrinta e stringTrinta não têm o mesmo tipo');
+      }
+
+      if (numeroDez == stringDez) {
+        console.log('As variáveis numeroDez e stringDez têm o mesmo valor, mas tipos diferentes');
+      } else {
+        console.log('As variáveis numeroDez e stringDez não têm o mesmo valor');
+      }
+    };
+  </script>
+  <button onclick="window.location.href = 'index.html';">Voltar para tela inicial</button>
+</body>
+</html>
+
