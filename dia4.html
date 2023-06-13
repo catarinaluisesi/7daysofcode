@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Adivinhação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+      margin-top: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    .message {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Jogo de Adivinhação:</h1>
+<br>
+
+    <p>Um número entre 0 e 10 foi escolhido. Tente adivinhar qual é!</p>
+
+    <input type="number" id="chute-input" placeholder="Digite um número de 0 a 10">
+    <button id="chute-button">Chutar</button>
+
+    <p class="message" id="message"></p>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var numeroSecreto = Math.floor(Math.random() * 11);
+      var tentativas = 3;
+      var acertou = false;
+
+      var chuteInput = document.getElementById('chute-input');
+      var chuteButton = document.getElementById('chute-button');
+      var messageElement = document.getElementById('message');
+
+      chuteButton.addEventListener('click', function() {
+        var chute = parseInt(chuteInput.value);
+        tentativas--;
+
+        if (chute === numeroSecreto) {
+          acertou = true;
+        } else {
+          messageElement.textContent = 'Você errou! Tentativas restantes: ' + tentativas;
+        }
+
+        if (acertou) {
+          messageElement.textContent = 'Parabéns! Você acertou o número.';
+        } else if (tentativas === 0) {
+          messageElement.textContent = 'Suas tentativas acabaram. O número era: ' + numeroSecreto;
+        } else {
+          messageElement.textContent = 'Você errou! Tentativas restantes: ' + tentativas;
+        }
+      });
+    });
+  </script>
+
+  <button onclick="window.location.href = 'index.html';">Voltar para tela inicial</button>
+</body>
+</html>
