@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist de Consumo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-image: linear-gradient(to bottom right, rgba(218, 218, 218, 0.4), rgba(218, 218, 218, 0.2)), url(".//img55.jpg");
+      background-repeat: repeat;
+      padding: 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-container {
+  background-color: #45a049;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  color: #fff;
+  background-color: #333;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 32px;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+li strong {
+  font-weight: bold;
+  margin-right: 10px;
+  flex-shrink: 0;
+  color: #333;
+}
+
+.category-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #45a049;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.category-icon.frutas {
+  background-color: #ff9800;
+}
+
+.category-icon.esporte {
+  background-color: #2196f3;
+}
+
+.category-icon.congelados {
+  background-color: #9c27b0;
+}
+
+.category-icon.besteira {
+  background-color: #f44336;
+}
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+.remove-product-button {
+  background-color: #f44336;
+}
+
+.remove-product-button[disabled] {
+  background-color: #999;
+  cursor: not-allowed;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+<script>
+  const categorias = {
+    frutas: [],
+    esporte: [],
+    congelados: [],
+    besteira: []
+  };
+  function adicionarProduto() {
+  const resposta = prompt("Deseja adicionar um produto à lista de compras? (sim/não)");
+
+  if (resposta.toLowerCase() === "sim") {
+    const produto = prompt("Digite o nome do produto:");
+
+    const categoria = prompt(
+      "Em qual categoria esse produto se encaixa? (frutas, esporte, congelados, besteira)"
+    ).toLowerCase();
+
+    if (categorias.hasOwnProperty(categoria)) {
+      categorias[categoria].push(produto);
+      atualizarBotaoRemover();
+      exibirLista();
+    } else {
+      alert("Categoria inválida!");
+    }
+
+    adicionarProduto();
+  }
+}
+
+function removerProduto() {
+  const produto = prompt("Digite o nome do produto que deseja remover:");
+  let removido = false;
+
+  for (const categoria in categorias) {
+    const index = categorias[categoria].indexOf(produto);
+
+    if (index !== -1) {
+      categorias[categoria].splice(index, 1);
+      removido = true;
+      break;
+    }
+  }
+
+  if (removido) {
+    alert(`O produto "${produto}" foi removido da lista.`);
+  } else {
+    alert("Não foi possível encontrar o produto na lista!");
+  }
+
+  exibirLista();
+  atualizarBotaoRemover();
+}
+
+function exibirLista() {
+  const listaElement = document.createElement("ul");
+
+  for (const categoria in categorias) {
+    if (categorias[categoria].length > 0) {
+      const categoriaElement = document.createElement("li");
+      categoriaElement.innerHTML = `
+        <div class="category-icon ${categoria}"></div>
+        <strong>${categoria.charAt(0).toUpperCase() + categoria.slice(1)}</strong>: ${categorias[categoria].join(", ")}`;
+      listaElement.appendChild(categoriaElement);
+    }
+  }
+
+  const containerElement = document.querySelector(".container");
+  const currentListElement = containerElement.querySelector(".current-list");
+
+  if (currentListElement) {
+    containerElement.removeChild(currentListElement);
+  }
+
+  listaElement.classList.add("current-list");
+  containerElement.appendChild(listaElement);
+}
+
+function atualizarBotaoRemover() {
+  const removerProdutoButton = document.getElementById("remover-produto-button");
+  const listaVazia = Object.values(categorias).every(categoria => categoria.length === 0);
+
+  if (listaVazia) {
+    removerProdutoButton.disabled = true;
+    removerProdutoButton.classList.add("disabled");
+  } else {
+    removerProdutoButton.disabled = false;
+    removerProdutoButton.classList.remove("disabled");
+  }
+}
+</script>
+</head>
+<body>
+  <button class="back-button" onclick="window.location.href = 'index.html';">Voltar</button>
+  <h1>Checklist de Consumo</h1>
+  <div class="container">
+    <div class="title-container">
+      <h2>Você deseja adicionar um produto à lista de compras?</h2>
+    </div>
+    <button onclick="adicionarProduto()">Adicionar Produto</button>
+    <button id="remover-produto-button" onclick="removerProduto()" disabled>Remover Produto</button>
+    <button onclick="exibirLista()">Exibir Lista</button>
+    <ul class="hidden"></ul>
+  </div>
+  <script>
+    atualizarBotaoRemover();
+  </script>
+</body>
+</html>
